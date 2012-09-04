@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C537A16215F558E100D81202 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = C537A16115F558E100D81202 /* Node.m */; };
+		C515CC5915F662C800C041AB /* PuzzleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C515CC5815F662C800C041AB /* PuzzleNode.m */; };
 		C54FB0EF15EE4B7000EF5588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54FB0EE15EE4B7000EF5588 /* Foundation.framework */; };
 		C54FB0F215EE4B7000EF5588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C54FB0F115EE4B7000EF5588 /* main.m */; };
 		C54FB0F615EE4B7000EF5588 /* Sliderz.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C54FB0F515EE4B7000EF5588 /* Sliderz.1 */; };
@@ -29,8 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C537A16015F558E100D81202 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		C537A16115F558E100D81202 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		C515CC5715F662C800C041AB /* PuzzleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleNode.h; sourceTree = "<group>"; };
+		C515CC5815F662C800C041AB /* PuzzleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleNode.m; sourceTree = "<group>"; };
 		C54FB0EA15EE4B7000EF5588 /* Sliderz */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sliderz; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54FB0EE15EE4B7000EF5588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C54FB0F115EE4B7000EF5588 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,10 +83,10 @@
 		C54FB0F015EE4B7000EF5588 /* Sliderz */ = {
 			isa = PBXGroup;
 			children = (
-				C54FB0FD15EE4BE400EF5588 /* Problem.m */,
+				C515CC5715F662C800C041AB /* PuzzleNode.h */,
+				C515CC5815F662C800C041AB /* PuzzleNode.m */,
 				C54FB0FC15EE4BE400EF5588 /* Problem.h */,
-				C537A16015F558E100D81202 /* Node.h */,
-				C537A16115F558E100D81202 /* Node.m */,
+				C54FB0FD15EE4BE400EF5588 /* Problem.m */,
 				C54FB0F115EE4B7000EF5588 /* main.m */,
 				C54FB11E15F40DF400EF5588 /* SolveWithAStar.h */,
 				C54FB11F15F40DF400EF5588 /* SolveWithAStar.m */,
@@ -159,7 +159,7 @@
 				C54FB0F215EE4B7000EF5588 /* main.m in Sources */,
 				C54FB0FE15EE4BE400EF5588 /* Problem.m in Sources */,
 				C54FB12015F40DF400EF5588 /* SolveWithAStar.m in Sources */,
-				C537A16215F558E100D81202 /* Node.m in Sources */,
+				C515CC5915F662C800C041AB /* PuzzleNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

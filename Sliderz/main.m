@@ -37,7 +37,7 @@ int main(int argc, const char * argv[])
         }
         
         
-        NSLog(@"Zero position: %i", [myPuzzle.zeroKey intValue]);
+       // NSLog(@"Zero position: %i", [myPuzzle.zeroKey intValue]);
         
         legalMoves = [myPuzzle getAllLegalMoves];
         

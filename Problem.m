@@ -9,40 +9,8 @@
 #import "Problem.h"
 
 @implementation Problem
-@synthesize  algoCode, heuristic, outputLevel, columns, rows, tileKeys, zeroKey, zeroIsOnLeft, zeroIsOnRight, headNode;
+@synthesize  algoCode, heuristic, outputLevel, currentNode, rows, columns;
 
--(NSNumber*) zeroKey
-{
-    NSArray* zeroPosition = [self.state allKeysForObject:[NSNumber numberWithInt:0]];
-    zeroKey = [zeroPosition objectAtIndex:0];
-    return [zeroPosition objectAtIndex:0];
-}
-
--(BOOL) zeroIsOnLeft
-{
-    NSLog(@"Zero position from zeroIsOnLeft method: %i", [self.zeroKey intValue]);
-    NSLog(@"zeroKey mod columns=:%i", [self.zeroKey intValue]%self.columns);
-    if ([self.zeroKey intValue]%self.columns==0)
-    {
-        zeroIsOnLeft = YES;
-        return YES;
-    }
-        
-    else
-    {
-        zeroIsOnLeft = NO;
-        return NO;
-    }
-        
-}
-
--(BOOL) zeroIsOnRight
-{
-    if ([self.zeroKey intValue]%self.columns==self.rows)
-        return YES;
-    else
-        return NO;
-}
 
 
 -(Problem*) initWithFile: (NSString*) fileName andColumns: (int) a_cols andRows: (int) a_rows
@@ -54,7 +22,7 @@
     int myInt = 0;
     NSArray* tileArray = [NSArray alloc];
     NSMutableArray* keyArray = [[NSMutableArray alloc] init];
-   
+    PuzzleNode* tmpNode = [[PuzzleNode alloc] init];
     
     
     NSMutableArray* fileInputArray = [[NSMutableArray alloc] init];
@@ -109,29 +77,34 @@
     {
         [keyArray addObject:[NSNumber numberWithInt:i]];
     }
-
-    self.state = [[NSMutableDictionary alloc] initWithObjects:tileArray forKeys:keyArray];
-    self.tileKeys = keyArray;
+    
+    
+    tmpNode = [tmpNode initWithState:[[NSMutableDictionary alloc] initWithObjects:tileArray forKeys:keyArray] andRows:a_rows andColumns:a_cols andParent:nil andTileKeys:keyArray];
+    
+    self.currentNode = tmpNode;
+   
+    //self.state = [[NSMutableDictionary alloc] initWithObjects:tileArray forKeys:keyArray];
+    //self.tileKeys = keyArray;
     return self;
 }
 
 -(void) printCurrentState
 {
     //NSEnumerator *enumerator = [state keyEnumerator];
-    NSArray* keys = [state allKeys];
+    NSArray* keys = [currentNode.state allKeys];
     
    printf("PRINT STATE:\n");
     
   //  printf("objectForKey 2: %i", [[state objectForKey:[NSNumber numberWithInt:2]] intValue]);
     
-    for (int i=0; i<[self.tileKeys count]; i++)
+    for (int i=0; i<[currentNode.tileKeys count]; i++)
     {
         
         
     //    NSLog(@"KEYS: %i", [[keys objectAtIndex:i] intValue]);
     
     //    printf("enumerating dictionary\n");
-        printf("%i ", [[state objectForKey:[self.tileKeys objectAtIndex:i]] intValue]);
+        printf("%i ", [[currentNode.state objectForKey:[currentNode.self.tileKeys objectAtIndex:i]] intValue]);
         
                
         
@@ -152,27 +125,27 @@
     
    // if (zeroPosition-columns) is contained in self.tileKeys then add "U" to moves array
     
-    if ([self.tileKeys containsObject:[NSNumber numberWithInt:([self.zeroKey intValue]+self.columns)]])
+    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]+currentNode.columns)]])
     {
         [moves addObject:[NSString stringWithFormat:@"D"]];
-        NSLog(@"Down move new zero key:%i", [[NSNumber numberWithInt:([self.zeroKey intValue]+self.columns)] intValue]);
+        NSLog(@"Down move new zero key:%i", [[NSNumber numberWithInt:([currentNode.zeroKey intValue]+currentNode.columns)] intValue]);
     }
     
-    NSLog(@"Up move new zero key:%i", [[NSNumber numberWithInt:([self.zeroKey intValue]-self.columns)] intValue]);
+    NSLog(@"Up move new zero key:%i", [[NSNumber numberWithInt:([currentNode.zeroKey intValue]-currentNode.columns)] intValue]);
     
-    if ([self.tileKeys containsObject:[NSNumber numberWithInt:([self.zeroKey intValue]-self.columns)]])
+    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]-currentNode.columns)]])
     {
         
         [moves addObject:[NSString stringWithFormat:@"U"]];
     }
     
-    if ([self.tileKeys containsObject:[NSNumber numberWithInt:([self.zeroKey intValue]+1)]] && !self.zeroIsOnRight)
+    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]+1)]] && !currentNode.zeroIsOnRight)
     {
         
         [moves addObject:[NSString stringWithFormat:@"R"]];
     }
     
-    if ([self.tileKeys containsObject:[NSNumber numberWithInt:([self.zeroKey intValue]-1)]] && !self.zeroIsOnLeft)
+    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]-1)]] && !currentNode.zeroIsOnLeft)
     {
         
         [moves addObject:[NSString stringWithFormat:@"L"]];

@@ -7,21 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Node.h"
+#import "PuzzleNode.h"
 
 @interface Problem : NSObject
 
-//@property NSMutableDictionary *state;
-@property Node* headNode;
+
+@property PuzzleNode* currentNode;
 @property int algoCode;
 @property int heuristic;
 @property int outputLevel;
-@property int columns;
 @property int rows;
-@property NSArray* tileKeys;
-@property NSNumber* zeroKey;
-@property BOOL zeroIsOnRight;
-@property BOOL zeroIsOnLeft;
+@property int columns;
+
 
 -(NSMutableDictionary*) result: (int) action;
 -(BOOL) goalTest: (NSMutableDictionary*) state;
