@@ -7,16 +7,53 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Problem.h"
+#import "SolveWithAStar.h"
+
 
 int main(int argc, const char * argv[])
 {
 
-    @autoreleasepool {
+    @autoreleasepool
+    
+    {
         
-        // insert code here...
-        NSLog(@"Hello, World!");
+        int columns = 3;        // number of columns for puzzle
+        int rows = 3;           // number of rows for puzzle
+        NSMutableArray* legalMoves;
+   
+        NSLog(@"Creating m*n puzzle from file: %@",[NSString stringWithCString:argv[1]]);
         
+        NSString* fileName = [NSString stringWithCString:argv[1]];
+        
+        
+        Problem* myPuzzle = [[Problem alloc] initWithFile:fileName andColumns:columns andRows:rows ];
+        
+        [myPuzzle printCurrentState];
+        
+        if (myPuzzle.algoCode==1)
+        {
+            [SolveWithAStar givenProblem:myPuzzle];
+        }
+        
+        
+        NSLog(@"Zero position: %i", [myPuzzle.zeroKey intValue]);
+        
+        legalMoves = [myPuzzle getAllLegalMoves];
+        
+        for (int i=0; i<[legalMoves count]; i++)
+        {
+            NSLog(@"Legal Moves: %@", [legalMoves objectAtIndex:i]);
+        }
+        
+      //  NSLog(@"Legal moves:")
+        
+   //     for (int i=0; i<[myPuzzle.tileKeys count]; i++)
+   //     {
+   //         NSLog(@"Keys: %i", [[myPuzzle.tileKeys objectAtIndex:i] intValue]);
+   //     }
     }
+    
     return 0;
 }
 

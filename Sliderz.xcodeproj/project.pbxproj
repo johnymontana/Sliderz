@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C537A16215F558E100D81202 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = C537A16115F558E100D81202 /* Node.m */; };
 		C54FB0EF15EE4B7000EF5588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54FB0EE15EE4B7000EF5588 /* Foundation.framework */; };
 		C54FB0F215EE4B7000EF5588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C54FB0F115EE4B7000EF5588 /* main.m */; };
 		C54FB0F615EE4B7000EF5588 /* Sliderz.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C54FB0F515EE4B7000EF5588 /* Sliderz.1 */; };
+		C54FB0FE15EE4BE400EF5588 /* Problem.m in Sources */ = {isa = PBXBuildFile; fileRef = C54FB0FD15EE4BE400EF5588 /* Problem.m */; };
+		C54FB12015F40DF400EF5588 /* SolveWithAStar.m in Sources */ = {isa = PBXBuildFile; fileRef = C54FB11F15F40DF400EF5588 /* SolveWithAStar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,11 +29,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C537A16015F558E100D81202 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		C537A16115F558E100D81202 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		C54FB0EA15EE4B7000EF5588 /* Sliderz */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sliderz; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54FB0EE15EE4B7000EF5588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C54FB0F115EE4B7000EF5588 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C54FB0F415EE4B7000EF5588 /* Sliderz-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sliderz-Prefix.pch"; sourceTree = "<group>"; };
 		C54FB0F515EE4B7000EF5588 /* Sliderz.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Sliderz.1; sourceTree = "<group>"; };
+		C54FB0FC15EE4BE400EF5588 /* Problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Problem.h; path = ../Problem.h; sourceTree = "<group>"; };
+		C54FB0FD15EE4BE400EF5588 /* Problem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Problem.m; path = ../Problem.m; sourceTree = "<group>"; };
+		C54FB11D15F2D78A00EF5588 /* testProblem.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testProblem.dat; sourceTree = "<group>"; };
+		C54FB11E15F40DF400EF5588 /* SolveWithAStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolveWithAStar.h; sourceTree = "<group>"; };
+		C54FB11F15F40DF400EF5588 /* SolveWithAStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolveWithAStar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +83,13 @@
 		C54FB0F015EE4B7000EF5588 /* Sliderz */ = {
 			isa = PBXGroup;
 			children = (
+				C54FB0FD15EE4BE400EF5588 /* Problem.m */,
+				C54FB0FC15EE4BE400EF5588 /* Problem.h */,
+				C537A16015F558E100D81202 /* Node.h */,
+				C537A16115F558E100D81202 /* Node.m */,
 				C54FB0F115EE4B7000EF5588 /* main.m */,
+				C54FB11E15F40DF400EF5588 /* SolveWithAStar.h */,
+				C54FB11F15F40DF400EF5588 /* SolveWithAStar.m */,
 				C54FB0F515EE4B7000EF5588 /* Sliderz.1 */,
 				C54FB0F315EE4B7000EF5588 /* Supporting Files */,
 			);
@@ -83,6 +99,7 @@
 		C54FB0F315EE4B7000EF5588 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C54FB11D15F2D78A00EF5588 /* testProblem.dat */,
 				C54FB0F415EE4B7000EF5588 /* Sliderz-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -140,6 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54FB0F215EE4B7000EF5588 /* main.m in Sources */,
+				C54FB0FE15EE4BE400EF5588 /* Problem.m in Sources */,
+				C54FB12015F40DF400EF5588 /* SolveWithAStar.m in Sources */,
+				C537A16215F558E100D81202 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +252,7 @@
 				C54FB0FB15EE4B7000EF5588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
