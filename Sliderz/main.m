@@ -55,7 +55,7 @@ int main(int argc, const char * argv[])
             NSLog(@"Legal Moves: %@", move);
         }
         
-        
+        [myPuzzle printPathToCurrentNode];
       //  NSLog(@"Legal moves:")
         
    //     for (int i=0; i<[myPuzzle.tileKeys count]; i++)

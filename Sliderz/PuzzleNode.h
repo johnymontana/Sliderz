@@ -10,7 +10,7 @@
 
 @interface PuzzleNode : NSObject
 
-@property NSDictionary *state;
+@property NSMutableDictionary *state;
 @property int columns;
 @property int rows;
 @property NSArray* tileKeys;

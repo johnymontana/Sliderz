@@ -160,7 +160,8 @@
 -(void) resultOfAction:(NSString *)a_action
 {
     
-    NSMutableDictionary* tmpState = self.currentNode.state;
+    NSMutableDictionary* tmpState = [[NSMutableDictionary alloc] init];
+    tmpState = self.currentNode.state;
     NSNumber *tmpOldZero;
     PuzzleNode* newNode = [[PuzzleNode alloc] init];
     int currentZeroKey = [self.currentNode.zeroKey intValue];
@@ -225,10 +226,51 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
     
     
 }
+-(void) printState:(NSMutableDictionary *) a_state
+{
+    
+    
+    NSArray* keys = [currentNode.state allKeys];
+    
+    printf("PRINT STATE:\n");
+    
+    //  printf("objectForKey 2: %i", [[state objectForKey:[NSNumber numberWithInt:2]] intValue]);
+    
+    for (int i=0; i<[currentNode.tileKeys count]; i++)
+    {
+        
+        
+        //    NSLog(@"KEYS: %i", [[keys objectAtIndex:i] intValue]);
+        
+        //    printf("enumerating dictionary\n");
+        printf("%i ", [[a_state objectForKey:[currentNode.self.tileKeys objectAtIndex:i]] intValue]);
+        
+        
+        
+        if (([[keys objectAtIndex:i] intValue]-1)%columns==0 && [[keys objectAtIndex:i] intValue]!=0)
+        {
+            printf("\n");
+        }
+        
+    }
 
+    
+}
 -(void) testMoves
 {
     [self resultOfAction:@"R"];
+}
+
+-(void) printPathToCurrentNode
+{
+    PuzzleNode *tmpNode;
+    tmpNode = self.currentNode;
+    
+    do {
+        NSLog(@"Path: %@", [tmpNode action]);
+        tmpNode = tmpNode.parent;} while (tmpNode!=nil);
+    
+    
 }
     
 @end
