@@ -20,11 +20,14 @@
 @property int columns;
 
 
--(NSMutableDictionary*) result: (int) action;
+//-(NSMutableDictionary*) result: (int) action;
 -(BOOL) goalTest: (NSMutableDictionary*) state;
 -(void) printState: (NSMutableDictionary*) state;
 -(void) printCurrentState;
 - (Problem*) initWithFile: (NSString*) fileName andColumns: (int) a_cols andRows:(int) a_rows;
 -(NSMutableArray*) getAllLegalMoves;
+- (void) resultOfAction: (NSString*) a_action;
+
+-(void) testMoves;
 
 @end

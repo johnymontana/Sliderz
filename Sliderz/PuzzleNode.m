@@ -10,7 +10,7 @@
 
 @implementation PuzzleNode
 
-@synthesize columns, rows, tileKeys, zeroKey, zeroIsOnLeft, zeroIsOnRight;
+@synthesize columns, rows, tileKeys, zeroKey, zeroIsOnLeft, zeroIsOnRight, action;
 
 -(NSNumber*) zeroKey
 {
@@ -45,7 +45,7 @@
         return NO;
 }
 
--(PuzzleNode*) initWithState:(NSDictionary *)a_state andRows:(int)a_rows andColumns:(int)a_columns andParent:(PuzzleNode *)a_parent andTileKeys:(NSArray *)a_keys
+-(PuzzleNode*) initWithState:(NSDictionary *)a_state andRows:(int)a_rows andColumns:(int)a_columns andParent:(PuzzleNode *)a_parent andTileKeys:(NSArray *)a_keys andAction:(NSString *)a_action
 {
     self=[super init];
     
@@ -55,7 +55,7 @@
     self.parent = a_parent;
     self.tileKeys = a_keys;
     
-    
+    self.action = a_action;
     
     return self;
 }

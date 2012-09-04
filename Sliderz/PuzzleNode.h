@@ -18,7 +18,8 @@
 @property BOOL zeroIsOnRight;
 @property BOOL zeroIsOnLeft;
 @property PuzzleNode* parent;
+@property NSString* action;
 
--(PuzzleNode*) initWithState: (NSDictionary*) a_state andRows: (int) a_rows andColumns: (int) a_columns andParent: (PuzzleNode*) a_parent andTileKeys:(NSArray*) a_keys;
+-(PuzzleNode*) initWithState: (NSDictionary*) a_state andRows: (int) a_rows andColumns: (int) a_columns andParent: (PuzzleNode*) a_parent andTileKeys:(NSArray*) a_keys andAction: (NSString*) a_action;
 
 @end

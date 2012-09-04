@@ -79,7 +79,8 @@
     }
     
     
-    tmpNode = [tmpNode initWithState:[[NSMutableDictionary alloc] initWithObjects:tileArray forKeys:keyArray] andRows:a_rows andColumns:a_cols andParent:nil andTileKeys:keyArray];
+    tmpNode = [tmpNode initWithState:[[NSMutableDictionary alloc] initWithObjects:tileArray forKeys:keyArray] andRows:a_rows andColumns:a_cols andParent:nil andTileKeys:keyArray andAction:nil];
+    
     
     self.currentNode = tmpNode;
    
@@ -154,6 +155,80 @@
 
     return moves;
     
+}
+
+-(void) resultOfAction:(NSString *)a_action
+{
+    
+    NSMutableDictionary* tmpState = self.currentNode.state;
+    NSNumber *tmpOldZero;
+    PuzzleNode* newNode = [[PuzzleNode alloc] init];
+    int currentZeroKey = [self.currentNode.zeroKey intValue];
+    
+    tmpOldZero = [self.currentNode.state objectForKey:self.currentNode.zeroKey];
+    
+    if (a_action==@"D")
+    {
+        // swap state[zeroKey] with state[zeroKey+columns]
+        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
+        
+        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
+        
+        [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
+                                                                                                                   
+        [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
+        
+    }
+    
+    
+    if (a_action==@"U")
+    {
+        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
+        
+        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
+        
+        [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
+        
+        [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
+    }
+    
+    if (a_action==@"R")
+    {
+        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
+        
+        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
+        
+        [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
+        
+        [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
+    }
+
+    if (a_action==@"L")
+    {
+        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
+        
+        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
+        
+        [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
+        
+        [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
+    }
+    
+    
+newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.columns andParent:self.currentNode andTileKeys:self.currentNode.tileKeys andAction:a_action];
+
+
+    
+    
+}
+
+-(void) testMoves
+{
+    [self resultOfAction:@"R"];
 }
     
 @end
