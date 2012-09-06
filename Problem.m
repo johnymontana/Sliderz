@@ -157,7 +157,7 @@
     
 }
 
--(void) resultOfAction:(NSString *)a_action
+-(PuzzleNode*) resultOfAction:(NSString *)a_action
 {
     
     NSMutableDictionary* tmpState = [[NSMutableDictionary alloc] init];
@@ -222,7 +222,7 @@
     
 newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.columns andParent:self.currentNode andTileKeys:self.currentNode.tileKeys andAction:a_action];
 
-
+    return newNode;
     
     
 }
@@ -259,6 +259,8 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
 -(void) testMoves
 {
     [self resultOfAction:@"R"];
+    [self resultOfAction:@"U"];
+    [self resultOfAction:@"L"];
 }
 
 -(void) printPathToCurrentNode
@@ -270,6 +272,41 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
         NSLog(@"Path: %@", [tmpNode action]);
         tmpNode = tmpNode.parent;} while (tmpNode!=nil);
     
+    
+}
+
+-(BOOL) goalTest
+{
+    // if key == objectForKey-1 for all entries except last
+    // && last objectForKey = 0
+    
+    
+    for (int i=0;i<[self.currentNode.tileKeys count]; i++)
+    //for (NSNumber* key in self.currentNode.tileKeys)
+    {
+        
+        if ([[self.currentNode.tileKeys objectAtIndex:i] intValue] == (self.rows*self.columns-1))
+            {
+                if ([[self.currentNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue] == 0)
+                {
+                    return YES;
+                }
+                
+                else
+                {
+                    return FALSE;
+                }
+            }
+        
+        else if ([[self.currentNode.tileKeys objectAtIndex:i] intValue] != ([[self.currentNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue]-1))
+        {
+            return FALSE;
+        }
+    }
+}
+
+-(BOOL) BFS
+{
     
 }
     

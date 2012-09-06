@@ -46,16 +46,31 @@ int main(int argc, const char * argv[])
             NSLog(@"Legal Moves: %@", [legalMoves objectAtIndex:i]);
         }
         
-        [myPuzzle testMoves];
+       // [myPuzzle testMoves];
         [myPuzzle printCurrentState];
         
         legalMoves = [myPuzzle getAllLegalMoves];
+        
         for (NSString* move in legalMoves)
         {
             NSLog(@"Legal Moves: %@", move);
         }
         
         [myPuzzle printPathToCurrentNode];
+        
+        if ([myPuzzle goalTest])
+        {
+            NSLog (@"GOALTEST TRUE");
+        
+        }
+        else
+        {
+            NSLog(@"GOALTEST FALSE");
+        }
+        
+        
+        
+        //NSLog(@"GoalTest: %@",[myPuzzle goalTest]);
       //  NSLog(@"Legal moves:")
         
    //     for (int i=0; i<[myPuzzle.tileKeys count]; i++)

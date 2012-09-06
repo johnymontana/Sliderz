@@ -21,13 +21,15 @@
 
 
 //-(NSMutableDictionary*) result: (int) action;
--(BOOL) goalTest: (NSMutableDictionary*) state;
+-(BOOL) goalTest;
 -(void) printState: (NSMutableDictionary*) a_state;
 -(void) printCurrentState;
 - (Problem*) initWithFile: (NSString*) fileName andColumns: (int) a_cols andRows:(int) a_rows;
 -(NSMutableArray*) getAllLegalMoves;
-- (void) resultOfAction: (NSString*) a_action;
+- (PuzzleNode*) resultOfAction: (NSString*) a_action;
 
 -(void) testMoves;
 -(void) printPathToCurrentNode;
+
+-(BOOL) BFS;
 @end
