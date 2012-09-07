@@ -117,7 +117,7 @@
     }
 }
 
--(NSMutableArray*) getAllLegalMoves
+-(NSMutableArray*) getAllLegalMoves: (PuzzleNode*) a_node
 {
     NSMutableArray* moves = [[NSMutableArray alloc] init];
     
@@ -126,54 +126,57 @@
     
    // if (zeroPosition-columns) is contained in self.tileKeys then add "U" to moves array
     
-    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]+currentNode.columns)]])
+    if ([a_node.tileKeys containsObject:[NSNumber numberWithInt:([a_node.zeroKey intValue]+a_node.columns)]])
     {
-        [moves addObject:[NSString stringWithFormat:@"D"]];
-        NSLog(@"Down move new zero key:%i", [[NSNumber numberWithInt:([currentNode.zeroKey intValue]+currentNode.columns)] intValue]);
+        [moves addObject:@"D"];
+      //  NSLog(@"Down move new zero key:%i", [[NSNumber numberWithInt:([a_node.zeroKey intValue]+a_node.columns)] intValue]);
     }
     
-    NSLog(@"Up move new zero key:%i", [[NSNumber numberWithInt:([currentNode.zeroKey intValue]-currentNode.columns)] intValue]);
+   // NSLog(@"Up move new zero key:%i", [[NSNumber numberWithInt:([a_node.zeroKey intValue]-a_node.columns)] intValue]);
     
-    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]-currentNode.columns)]])
+    if ([a_node.tileKeys containsObject:[NSNumber numberWithInt:([a_node.zeroKey intValue]-a_node.columns)]])
     {
         
-        [moves addObject:[NSString stringWithFormat:@"U"]];
+        [moves addObject:@"U"];
     }
     
-    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]+1)]] && !currentNode.zeroIsOnRight)
+    if ([a_node.tileKeys containsObject:[NSNumber numberWithInt:([a_node.zeroKey intValue]+1)]] && !a_node.zeroIsOnRight)
     {
         
-        [moves addObject:[NSString stringWithFormat:@"R"]];
+       [moves addObject:@"R"];
     }
     
-    if ([currentNode.tileKeys containsObject:[NSNumber numberWithInt:([currentNode.zeroKey intValue]-1)]] && !currentNode.zeroIsOnLeft)
+    if ([a_node.tileKeys containsObject:[NSNumber numberWithInt:([a_node.zeroKey intValue]-1)]] && !a_node.zeroIsOnLeft)
     {
         
-        [moves addObject:[NSString stringWithFormat:@"L"]];
+        [moves addObject:@"L"];
     }
 
-
+   // NSLog(@"ALL LEGAL MOVES: %@", moves);
     return moves;
-    
+   // NSMutableArray *tmp = [[NSMutableArray alloc] init];
+   // [tmp addObject:@"D"];
+   // [tmp addObject:@"U"];
+  //  return tmp;
 }
 
--(PuzzleNode*) resultOfAction:(NSString *)a_action
+-(PuzzleNode*) resultOfAction:(NSString *)a_action givenNode: (PuzzleNode*) a_node
 {
     
     NSMutableDictionary* tmpState = [[NSMutableDictionary alloc] init];
-    tmpState = self.currentNode.state;
+    tmpState = a_node.state;
     NSNumber *tmpOldZero;
     PuzzleNode* newNode = [[PuzzleNode alloc] init];
-    int currentZeroKey = [self.currentNode.zeroKey intValue];
+    int currentZeroKey = [a_node.zeroKey intValue];
     
-    tmpOldZero = [self.currentNode.state objectForKey:self.currentNode.zeroKey];
+    tmpOldZero = [a_node.state objectForKey:a_node.zeroKey];
     
     if (a_action==@"D")
     {
         // swap state[zeroKey] with state[zeroKey+columns]
-        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
+        NSNumber *tmpNewZero = [a_node.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
         
-        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:a_node.zeroKey];
         [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey+self.columns)]];
         
         [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
@@ -183,11 +186,11 @@
     }
     
     
-    if (a_action==@"U")
+    else if (a_action==@"U")
     {
-        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
+        NSNumber *tmpNewZero = [a_node.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
         
-        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:a_node.zeroKey];
         [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
         
         [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
@@ -195,11 +198,11 @@
         [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey-self.columns)]];
     }
     
-    if (a_action==@"R")
+    else if (a_action==@"R")
     {
-        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
+        NSNumber *tmpNewZero = [a_node.state objectForKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
         
-        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:a_node.zeroKey];
         [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
         
         [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
@@ -207,11 +210,11 @@
         [tmpState setObject:[NSNumber numberWithInt:0] forKey:[NSNumber numberWithInt:(currentZeroKey+1)]];
     }
 
-    if (a_action==@"L")
+    else if (a_action==@"L")
     {
-        NSNumber *tmpNewZero = [self.currentNode.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
+        NSNumber *tmpNewZero = [a_node.state objectForKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
         
-        [tmpState removeObjectForKey:self.currentNode.zeroKey];
+        [tmpState removeObjectForKey:a_node.zeroKey];
         [tmpState removeObjectForKey:[NSNumber numberWithInt:(currentZeroKey-1)]];
         
         [tmpState setObject:tmpNewZero forKey:[NSNumber numberWithInt:currentZeroKey]];
@@ -220,7 +223,7 @@
     }
     
     
-newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.columns andParent:self.currentNode andTileKeys:self.currentNode.tileKeys andAction:a_action];
+newNode = [newNode initWithState:[[NSMutableDictionary alloc] initWithDictionary:tmpState] andRows:self.rows andColumns:self.columns andParent:a_node andTileKeys:a_node.tileKeys andAction:a_action];
 
     return newNode;
     
@@ -256,26 +259,38 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
 
     
 }
+
+
 -(void) testMoves
 {
-    [self resultOfAction:@"R"];
-    [self resultOfAction:@"U"];
-    [self resultOfAction:@"L"];
+    PuzzleNode *secondNode = [[PuzzleNode alloc] init];
+    secondNode = [self resultOfAction:@"R" givenNode:self.currentNode];
+    [self printState:secondNode.state];
+    self.currentNode=secondNode;
+    
+    [self printPathToCurrentNode];
+    
+    [self printState:self.currentNode.state];
+   // [self resultOfAction:@"U"];
+   // [self resultOfAction:@"L"];
 }
+
 
 -(void) printPathToCurrentNode
 {
     PuzzleNode *tmpNode;
     tmpNode = self.currentNode;
     
-    do {
+    while (tmpNode != nil)
+    {
         NSLog(@"Path: %@", [tmpNode action]);
-        tmpNode = tmpNode.parent;} while (tmpNode!=nil);
+        tmpNode = tmpNode.parent;
+    }
     
     
 }
 
--(BOOL) goalTest
+-(BOOL) goalTest: (PuzzleNode*) testNode
 {
     // if key == objectForKey-1 for all entries except last
     // && last objectForKey = 0
@@ -287,7 +302,7 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
         
         if ([[self.currentNode.tileKeys objectAtIndex:i] intValue] == (self.rows*self.columns-1))
             {
-                if ([[self.currentNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue] == 0)
+                if ([[testNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue] == 0)
                 {
                     return YES;
                 }
@@ -298,15 +313,118 @@ newNode = [newNode initWithState:tmpState andRows:self.rows andColumns:self.colu
                 }
             }
         
-        else if ([[self.currentNode.tileKeys objectAtIndex:i] intValue] != ([[self.currentNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue]-1))
+        else if ([[self.currentNode.tileKeys objectAtIndex:i] intValue] != ([[testNode.state objectForKey:[self.currentNode.tileKeys objectAtIndex:i]] intValue]-1))
         {
             return FALSE;
         }
     }
 }
 
+-(NSMutableArray*) getAllAdjacent:(PuzzleNode *)a_node
+{
+    NSMutableArray* adjacents = [[NSMutableArray alloc] init];
+    
+    for (NSString* string in [self getAllLegalMoves:a_node])
+    {
+        [adjacents addObject:(PuzzleNode*)[self resultOfAction:string givenNode:a_node]];
+    }
+    
+    return adjacents;
+}
+
+-(BOOL) haveWeBeenHereBefore: (NSMutableDictionary*) a_state givenHistory: (NSMutableArray*) a_history
+{
+    for (NSMutableDictionary* dict in a_history)
+    {
+        NSEnumerator *enumerator = [dict keyEnumerator];
+        id key;
+        id x;
+        id y;
+        
+        while ((key = [enumerator nextObject]))
+        {
+           // NSLog(@"dict:");
+        //    [self printState:dict];
+          //  NSLog(@"a_state");
+       //     [self printState:a_state];
+            x= [NSNumber numberWithInt:[dict objectForKey:key]];
+            
+            
+            y = [NSNumber numberWithInt:[a_state objectForKey:key]];
+           
+            if (x!=y)
+            {
+                NSLog(@"Returning NO");
+                return NO;
+            }
+        }
+        
+        NSLog(@"returning yes");
+        return YES;
+    }
+    NSLog(@"Returning yes");
+    return YES;
+}
 -(BOOL) BFS
 {
+    NSMutableArray* queue = [[NSMutableArray alloc] init];
+    NSMutableArray* visited = [[NSMutableArray alloc] init];
+    
+    //PuzzleNode* tmpNode = [[PuzzleNode alloc] init];
+    
+    [queue addObject:self.currentNode];
+    
+    self.currentNode.visited = YES;
+    [visited addObject:self.currentNode.state];
+    while ( ([queue count]>0))
+    {
+        NSLog(@"%ld", [queue count]);
+        
+    PuzzleNode* tmpNode = [[PuzzleNode alloc] init];
+    
+        tmpNode = [queue objectAtIndex:0];
+        //tmpNode.visited = YES;
+        [visited addObject:[[NSDictionary alloc] initWithDictionary:tmpNode.state]];
+    //    [self printCurrentState];
+     //   [self printState:tmpNode.state];
+        
+        [queue removeObjectAtIndex:0];
+        //tmpNode.visited = YES;
+       // self.currentNode=tmpNode;
+        
+        if ([self goalTest: tmpNode])
+        {
+            self.currentNode = tmpNode;
+            NSLog(@"Path found!");
+            [self printPathToCurrentNode];
+            return YES;
+        }
+        
+        PuzzleNode* tmpTmpNode = [[PuzzleNode alloc] init];
+        tmpTmpNode = [tmpTmpNode initWithState:tmpNode.state andRows:tmpNode.rows andColumns:tmpNode.columns andParent:tmpNode.parent andTileKeys:tmpNode.tileKeys andAction:tmpNode.action];
+        
+        for (PuzzleNode* edge in [self getAllAdjacent:tmpNode])
+        {
+        //NSUInteger index = [queue indexOfObject:edge];
+            
+            if (![self haveWeBeenHereBefore: edge.state givenHistory:visited])
+            {
+                
+                [queue addObject:edge];
+            }
+        }
+        
+        //tmpNode.parent = self.currentNode;
+        
+        
+        
+        
+        
+         self.currentNode = tmpNode;
+        
+     //   [self printPathToCurrentNode];
+    } 
+    return NO;
     
 }
     

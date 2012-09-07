@@ -29,44 +29,45 @@ int main(int argc, const char * argv[])
         
         Problem* myPuzzle = [[Problem alloc] initWithFile:fileName andColumns:columns andRows:rows ];
         
-        [myPuzzle printCurrentState];
+     //   [myPuzzle printCurrentState];
+     //   [myPuzzle testMoves];
         
-        if (myPuzzle.algoCode==1)
-        {
-            [SolveWithAStar givenProblem:myPuzzle];
-        }
+       // if (myPuzzle.algoCode==1)
+      //  {
+      //      [SolveWithAStar givenProblem:myPuzzle];
+      //  }
         
         
        // NSLog(@"Zero position: %i", [myPuzzle.zeroKey intValue]);
         
-        legalMoves = [myPuzzle getAllLegalMoves];
+      //  legalMoves = [myPuzzle getAllLegalMoves];
         
-        for (int i=0; i<[legalMoves count]; i++)
-        {
-            NSLog(@"Legal Moves: %@", [legalMoves objectAtIndex:i]);
-        }
+   //    for (int i=0; i<[legalMoves count]; i++)
+  //     {
+  //          NSLog(@"Legal Moves: %@", [legalMoves objectAtIndex:i]);
+  //     }
         
        // [myPuzzle testMoves];
-        [myPuzzle printCurrentState];
+    //    [myPuzzle printCurrentState];
         
-        legalMoves = [myPuzzle getAllLegalMoves];
+    //    legalMoves = [myPuzzle getAllLegalMoves];
         
-        for (NSString* move in legalMoves)
-        {
-            NSLog(@"Legal Moves: %@", move);
-        }
+    //    for (NSString* move in legalMoves)
+    //    {
+    //        NSLog(@"Legal Moves: %@", move);
+    //    }
         
-        [myPuzzle printPathToCurrentNode];
+    //    [myPuzzle printPathToCurrentNode];
         
-        if ([myPuzzle goalTest])
-        {
-            NSLog (@"GOALTEST TRUE");
+    //    if ([myPuzzle goalTest])
+     //   {
+     //       NSLog (@"GOALTEST TRUE");
         
-        }
-        else
-        {
-            NSLog(@"GOALTEST FALSE");
-        }
+    //    }
+    //    else
+    //    {
+    //        NSLog(@"GOALTEST FALSE");
+    //    }
         
         
         
@@ -77,6 +78,11 @@ int main(int argc, const char * argv[])
    //     {
    //         NSLog(@"Keys: %i", [[myPuzzle.tileKeys objectAtIndex:i] intValue]);
    //     }
+        
+        
+    
+        [myPuzzle BFS];
+       // [myPuzzle testMoves];
     }
     
     return 0;

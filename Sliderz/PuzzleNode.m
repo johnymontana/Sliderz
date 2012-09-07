@@ -10,7 +10,7 @@
 
 @implementation PuzzleNode
 
-@synthesize columns, rows, tileKeys, zeroKey, zeroIsOnLeft, zeroIsOnRight, action;
+@synthesize columns, rows, tileKeys, zeroKey, zeroIsOnLeft, zeroIsOnRight, action, visited;
 
 -(NSNumber*) zeroKey
 {
@@ -21,8 +21,8 @@
 
 -(BOOL) zeroIsOnLeft
 {
-    NSLog(@"Zero position from zeroIsOnLeft method: %i", [self.zeroKey intValue]);
-    NSLog(@"zeroKey mod columns=:%i", [self.zeroKey intValue]%self.columns);
+   // NSLog(@"Zero position from zeroIsOnLeft method: %i", [self.zeroKey intValue]);
+   // NSLog(@"zeroKey mod columns=:%i", [self.zeroKey intValue]%self.columns);
     if ([self.zeroKey intValue]%self.columns==0)
     {
         zeroIsOnLeft = YES;
